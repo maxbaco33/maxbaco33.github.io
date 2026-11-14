@@ -87,11 +87,15 @@
       "items": [
         "Avionique Rafale",
         "Systèmes de navigation et d'armement (SNA)",
-        "Recherche de pannes",
-        "Tests fonctionnels",
+        "Systèmes embarqués",
+        "Électronique",
         "Bus MIL-STD-1553B",
         "Bus STANAG 3910",
-        "Électronique"
+        "Recherche de pannes",
+        "Maintenance corrective",
+        "Tests fonctionnels",
+        "Remise en service",
+        "Coordination d'équipe"
       ]
     },
     {
