@@ -281,6 +281,8 @@ a { color: var(--accent); text-underline-offset: 3px; }
   .section { padding: 0; margin: 0 0 11pt; border: 0; }
   .section > h2 { font-size: 11.5pt; margin-bottom: 6pt; padding-bottom: 3pt; border-bottom: 0.75pt solid var(--line); text-transform: uppercase; letter-spacing: 0.06em; }
   .section > h2::after { display: none; }
+  .section > h2 { break-after: avoid; }
+  #competences { break-before: page; }
   .prose { font-size: 9.6pt; line-height: 1.5; gap: 4pt; max-width: none; }
   .datasheet { margin-top: 8pt; border-radius: 0; }
   .datasheet div { padding: 3pt 8pt; grid-template-columns: 7.5rem 1fr; }

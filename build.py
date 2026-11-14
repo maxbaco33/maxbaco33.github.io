@@ -61,12 +61,12 @@ def boutons(classe="", linkedin=True):
 
 def s_profil():
     paras = "".join(f"<p>{e(p)}</p>" for p in D["profil"])
-    fiche = "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in D["en_bref"])
+    fiche = "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in D.get("en_bref", []))
+    bloc_fiche = f'\n  <dl class="datasheet" aria-label="En bref">{fiche}</dl>' if fiche else ""
     return f"""
 <section id="profil" class="section" aria-labelledby="t-profil">
   <h2 id="t-profil">Profil</h2>
-  <div class="prose">{paras}</div>
-  <dl class="datasheet" aria-label="En bref">{fiche}</dl>
+  <div class="prose">{paras}</div>{bloc_fiche}
   <div class="objectif"><p class="objectif-titre">Objectif professionnel</p><p>{e(D["objectif"])}</p></div>
 </section>"""
 
