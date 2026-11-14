@@ -1,0 +1,209 @@
+{
+  "site": {
+    "url": "https://maxbaco33.github.io/",
+    "langue": "fr",
+    "titre": "Maxence Baconnet, technicien avionique Rafale",
+    "description": "Technicien avionique Rafale : dépannage, essais et remise en service. Électronique, systèmes embarqués, IA et web.",
+    "mise_a_jour": "novembre 2026"
+  },
+  "identite": {
+    "prenom": "Maxence",
+    "nom": "Baconnet",
+    "titre": "Technicien avionique Rafale",
+    "accroche": "Dépannage, essais et remise en service",
+    "localisation": "Landes, Nouvelle-Aquitaine",
+    "statut": "En poste dans l'Armée de l'Air et de l'Espace",
+    "linkedin": "https://www.linkedin.com/in/maxence-baconnet-1a10a3246"
+  },
+  "a_propos": [
+    "Technicien avionique dans l'Armée de l'Air et de l'Espace depuis 2018, je diagnostique et résous des pannes sur Rafale, de l'analyse du dysfonctionnement jusqu'à la remise en service de l'avion, pour garantir le maintien de l'activité opérationnelle.",
+    "Titulaire d'un BTS Systèmes Numériques (option Électronique et communications), j'associe une solide base en électronique à plus de 8 ans de terrain dans un environnement aéronautique exigeant.",
+    "Un technicien qui comprend l'avion et qui parle aussi le langage des équipes digitales et des outils d'IA. Ce site, conçu avec l'IA comme copilote, en est la démonstration."
+  ],
+  "synoptique": [
+    {
+      "titre": "Avionique Rafale",
+      "detail": "8 ans de terrain, spécialité SNA",
+      "etat": "ok",
+      "page": "parcours"
+    },
+    {
+      "titre": "Qualifications",
+      "detail": "Licence Be2 et habilitation APRS",
+      "etat": "ok",
+      "page": "qualifs"
+    },
+    {
+      "titre": "Électronique et systèmes",
+      "detail": "BTS Systèmes Numériques",
+      "etat": "ok",
+      "page": "systemes"
+    },
+    {
+      "titre": "IA et web",
+      "detail": "Projets en conception",
+      "etat": "encours",
+      "page": "projets"
+    }
+  ],
+  "plan_de_vol": [
+    {
+      "code": "ELECT",
+      "dates": "2012 – 2015",
+      "intitule": "Baccalauréat professionnel Électrotechnique",
+      "organisme": "Lycée professionnel Condorcet",
+      "lieu": "",
+      "points": []
+    },
+    {
+      "code": "BTSSN",
+      "dates": "2015 – 2018",
+      "intitule": "BTS Systèmes Numériques, option Électronique et communications",
+      "organisme": "Lycée Pape Clément",
+      "lieu": "",
+      "points": []
+    },
+    {
+      "code": "SGTRL",
+      "dates": "Juin – août 2018",
+      "intitule": "Technicien système réseau",
+      "organisme": "Sogetrel",
+      "lieu": "",
+      "points": [
+        "Première expérience en entreprise à la sortie du BTS."
+      ]
+    },
+    {
+      "code": "RCHFT",
+      "dates": "Août 2018 – juin 2020",
+      "intitule": "Élève sous-officier",
+      "organisme": "Armée de l'Air et de l'Espace",
+      "lieu": "Rochefort",
+      "points": [
+        "Formation militaire de sous-officier et formation technique de spécialité avionique."
+      ]
+    },
+    {
+      "code": "RAFAL",
+      "dates": "Depuis juillet 2020",
+      "intitule": "Technicien avionique Rafale",
+      "organisme": "Armée de l'Air et de l'Espace",
+      "lieu": "Landes",
+      "actif": true,
+      "points": [
+        "Diagnostic et recherche de pannes sur les systèmes de navigation et d'armement (SNA).",
+        "Dépannage en environnement opérationnel pour remettre les avions en ligne dans les meilleurs délais.",
+        "Essais et vérifications fonctionnelles en zone vol et en zone chantier.",
+        "Remise en service des aéronefs (habilitation APRS), dans le respect des procédures et de la traçabilité.",
+        "Organisation et suivi des opérations de dépannage, coordination d'équipes techniques et contrôle des interventions."
+      ]
+    },
+    {
+      "code": "INDUS",
+      "dates": "Prochaine étape",
+      "intitule": "Rejoindre l'industrie",
+      "organisme": "Aéronautique, électronique ou défense",
+      "lieu": "Nouvelle-Aquitaine",
+      "destination": true,
+      "points": [
+        "Postes visés : essais et validation, support technique, expertise électronique, coordination technique ou supervision de maintenance."
+      ]
+    }
+  ],
+  "qualifications": {
+    "licences": [
+      {
+        "intitule": "Licence de maintenance aéronautique Be2",
+        "precision": "Rafale C, B et M",
+        "organisme": "DSAÉ, Direction de la sécurité aéronautique d'État"
+      },
+      {
+        "intitule": "Habilitation APRS",
+        "precision": "Approbation pour remise en service",
+        "organisme": "DMAé, Direction de la maintenance aéronautique"
+      }
+    ],
+    "diplomes": [
+      {
+        "intitule": "BTS Systèmes Numériques",
+        "precision": "Option Électronique et communications",
+        "organisme": "Lycée Pape Clément",
+        "annee": "2018"
+      },
+      {
+        "intitule": "Baccalauréat professionnel Électrotechnique",
+        "precision": "",
+        "organisme": "Lycée professionnel Condorcet",
+        "annee": "2015"
+      }
+    ]
+  },
+  "competences": [
+    {
+      "groupe": "Maintenance aéronautique",
+      "items": [
+        ["Avionique", "ok"],
+        ["Systèmes de navigation et d'armement (SNA)", "ok"],
+        ["Dépannage et recherche de pannes", "ok"],
+        ["Maintenance corrective", "ok"],
+        ["Tests fonctionnels", "ok"],
+        ["Remise en service (APRS)", "ok"]
+      ]
+    },
+    {
+      "groupe": "Électronique et systèmes",
+      "items": [
+        ["Électronique", "ok"],
+        ["Systèmes embarqués", "ok"],
+        ["Support technique", "ok"]
+      ]
+    },
+    {
+      "groupe": "Organisation et qualité",
+      "items": [
+        ["Coordination d'équipe", "ok"],
+        ["Assurance qualité", "ok"],
+        ["Sécurité et traçabilité", "ok"]
+      ]
+    },
+    {
+      "groupe": "Numérique",
+      "items": [
+        ["IA générative : assistants de code, modèles en local", "ok"],
+        ["HTML, CSS, JavaScript", "ok"],
+        ["Python", "encours"]
+      ]
+    }
+  ],
+  "projets": [
+    {
+      "id": "mini-avionique",
+      "titre": "Mini-avionique modulaire",
+      "resume": "Plusieurs modules électroniques reliés par un bus CAN, comme les équipements d'un avion : capteurs redondants avec logique de vote, autotest intégré et IA qui détecte les dégradations et désigne le module à remplacer.",
+      "demontre": "Conception d'un système embarqué, essais par injection de pannes, diagnostic.",
+      "briques": ["ESP32", "Bus CAN", "Redondance", "Autotest (BITE)", "IA"]
+    },
+    {
+      "id": "vision-synthetique",
+      "titre": "Vision synthétique pour la route",
+      "resume": "Le principe de la vision synthétique des avions appliqué à la voiture : la route à venir dessinée en 3D à partir de données cartographiques ouvertes, virages et pentes anticipés, vitesse conseillée et contrôle d'intégrité par caméra.",
+      "demontre": "Navigation, traitement de données géographiques, rendu 3D temps réel.",
+      "briques": ["GPS", "OpenStreetMap", "Rendu 3D", "Contrôle d'intégrité"]
+    },
+    {
+      "id": "diagnostic-obd",
+      "titre": "Diagnostic auto assisté par IA",
+      "resume": "Surveillance continue du moteur par la prise OBD, alertes hiérarchisées comme dans un cockpit (avertissement, attention, information) et explication des pannes en langage clair. Lecture seule : aucune écriture sur le réseau du véhicule.",
+      "demontre": "Acquisition de données, détection d'anomalies, conception orientée sécurité.",
+      "briques": ["OBD-II", "Bluetooth", "Détection d'anomalies", "IA"]
+    },
+    {
+      "id": "assistant-part66",
+      "titre": "Assistant de révision Part-66",
+      "resume": "Une IA qui répond aux questions de maintenance en citant la page exacte de documents publics (manuels FAA, réglementation EASA) et qui génère des QCM par module de licence.",
+      "demontre": "IA appliquée à la documentation technique.",
+      "briques": ["RAG", "Documentation technique", "Part-66"]
+    }
+  ],
+  "note_projets": "Projets personnels menés sur mon temps libre, uniquement à partir de matériel, de données et de documents publics."
+}
