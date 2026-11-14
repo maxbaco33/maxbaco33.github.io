@@ -199,6 +199,15 @@ a { color: var(--accent); text-underline-offset: 3px; }
 .skill-group ul { list-style: none; margin: 0; padding: 0; }
 .skill-group li { padding: 8px 0; border-bottom: 1px solid var(--line); }
 
+.skills + .subhead { margin-top: 36px; }
+.langs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 48px; }
+.lang { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 6px 12px; padding: 4px 0 8px; }
+.lang-name { font-size: 16px; font-weight: 600; color: var(--navy); }
+.lang-level { font-size: 14.5px; color: var(--muted); text-align: right; }
+.gauge { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; }
+.gauge i { display: block; height: 6px; border-radius: 1px; background: var(--line); }
+.gauge i.on { background: var(--accent); }
+
 .certs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .cert { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px; }
 .cert-title { font-size: 17px; font-weight: 600; }
@@ -239,7 +248,7 @@ a { color: var(--accent); text-underline-offset: 3px; }
   .content { padding: 44px 24px 32px; max-width: none; }
 }
 @media (max-width: 720px) {
-  .skills, .certs, .projects { grid-template-columns: minmax(0, 1fr); }
+  .skills, .certs, .projects, .langs { grid-template-columns: minmax(0, 1fr); }
   .entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .datasheet div { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .actions-side .btn { flex: 1 1 100%; }
@@ -285,6 +294,13 @@ a { color: var(--accent); text-underline-offset: 3px; }
   .skills { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8pt 14pt; }
   .skill-group h3 { font-size: 9.6pt; }
   .skill-group li { padding: 2pt 0; font-size: 9pt; }
+  .skills + .subhead { margin-top: 8pt; }
+  .langs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4pt 14pt; }
+  .lang { gap: 2pt 6pt; padding: 1pt 0 4pt; }
+  .lang-name { font-size: 9.6pt; }
+  .lang-level { font-size: 8.5pt; }
+  .gauge { gap: 2pt; }
+  .gauge i { height: 3pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .certs { gap: 8pt; }
   .cert { padding: 6pt 9pt; border-radius: 0; }
   .cert-title { font-size: 10pt; }

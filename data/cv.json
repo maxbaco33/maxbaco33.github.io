@@ -141,6 +141,10 @@
       ]
     }
   ],
+  "langues": [
+    { "langue": "Français", "code": "fr", "niveau": "Langue maternelle", "note": 5 },
+    { "langue": "Anglais", "code": "en", "niveau": "Niveau élémentaire", "note": 2 }
+  ],
   "certifications": [
     {
       "intitule": "Licence de maintenance aéronautique Be2",

@@ -101,10 +101,22 @@ def s_competences():
         + "</ul></div>"
         for g in D["competences"]
     )
+    langues = "".join(
+        f"""
+    <li class="lang">
+      <p class="lang-name">{e(l["langue"])}</p>
+      <p class="lang-level">{e(l["niveau"])}</p>
+      <span class="gauge" role="img" aria-label="Niveau {l["note"]} sur 5">"""
+        + "".join('<i class="on"></i>' if n < l["note"] else "<i></i>" for n in range(5))
+        + "</span>\n    </li>"
+        for l in D.get("langues", [])
+    )
+    bloc_langues = (f'\n  <h3 class="subhead">Langues</h3>\n  <ul class="langs">{langues}\n  </ul>'
+                    if langues else "")
     return f"""
 <section id="competences" class="section" aria-labelledby="t-competences">
   <h2 id="t-competences">Compétences</h2>
-  <div class="skills">{groupes}</div>
+  <div class="skills">{groupes}</div>{bloc_langues}
 </section>"""
 
 
@@ -199,6 +211,7 @@ def json_ld():
         "alumniOf": [{"@type": "EducationalOrganization", "name": f["etablissement"]} for f in D["formation"]],
         "hasCredential": [{"@type": "EducationalOccupationalCredential", "name": c["intitule"]} for c in D["certifications"]],
         "knowsAbout": [i for g in D["competences"] for i in g["items"]],
+        "knowsLanguage": [l["code"] for l in D.get("langues", [])],
     }, ensure_ascii=False, indent=1)
 
 
