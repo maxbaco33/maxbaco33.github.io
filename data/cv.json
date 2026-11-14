@@ -83,35 +83,19 @@
   ],
   "competences": [
     {
-      "groupe": "Maintenance aéronautique",
+      "groupe": "Techniques",
       "items": [
-        "Avionique",
+        "Avionique Rafale",
         "Systèmes de navigation et d'armement (SNA)",
         "Recherche de pannes",
-        "Maintenance corrective",
         "Tests fonctionnels",
-        "Remise en service"
+        "Bus MIL-STD-1553B",
+        "Bus STANAG 3910",
+        "Électronique"
       ]
     },
     {
-      "groupe": "Électronique et systèmes",
-      "items": [
-        "Électronique",
-        "Systèmes embarqués",
-        "Support technique"
-      ]
-    },
-    {
-      "groupe": "Méthodes et organisation",
-      "items": [
-        "Coordination d'équipe",
-        "Assurance qualité",
-        "Sécurité et traçabilité",
-        "Travail sous procédures"
-      ]
-    },
-    {
-      "groupe": "Outils numériques",
+      "groupe": "Outils",
       "items": [
         "Excel, PowerPoint, Word",
         "IA générative",
@@ -120,8 +104,18 @@
     }
   ],
   "langues": [
-    { "langue": "Français", "code": "fr", "niveau": "Langue maternelle", "note": 5 },
-    { "langue": "Anglais", "code": "en", "niveau": "Niveau élémentaire", "note": 2 }
+    {
+      "langue": "Français",
+      "code": "fr",
+      "niveau": "Langue maternelle",
+      "note": 5
+    },
+    {
+      "langue": "Anglais",
+      "code": "en",
+      "niveau": "Niveau élémentaire",
+      "note": 2
+    }
   ],
   "certifications": [
     {

@@ -300,6 +300,9 @@ a { color: var(--accent); text-underline-offset: 3px; }
   .skills { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8pt 14pt; }
   .skill-group h3 { font-size: 9.6pt; margin-bottom: 2pt; padding-bottom: 2pt; }
   .skill-group li { padding: 2pt 0; font-size: 9pt; }
+  .skill-group.is-wide { grid-column: span 2; }
+  .skill-group.is-wide ul { columns: 2; column-gap: 14pt; }
+  .skill-group.is-wide li { break-inside: avoid; }
   .skills + .subhead { margin-top: 8pt; }
   .langs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4pt 14pt; }
   .lang { gap: 2pt 6pt; padding: 1pt 0 4pt; }

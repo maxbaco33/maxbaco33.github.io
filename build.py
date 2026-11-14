@@ -96,7 +96,7 @@ def s_experience():
 
 def s_competences():
     groupes = "".join(
-        f'<div class="skill-group"><h3>{e(g["groupe"])}</h3><ul>'
+        f'<div class="skill-group{" is-wide" if len(g["items"]) > 4 else ""}"><h3>{e(g["groupe"])}</h3><ul>'
         + "".join(f"<li>{e(i)}</li>" for i in g["items"])
         + "</ul></div>"
         for g in D["competences"]
