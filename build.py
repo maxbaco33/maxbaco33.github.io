@@ -23,6 +23,11 @@ SECTIONS = [
 ]
 
 
+def court(url):
+    """Adresse lisible pour le papier : sans protocole, sans www, sans barre finale."""
+    return url.replace("https://", "").replace("www.", "").rstrip("/")
+
+
 def e(texte):
     return html.escape(str(texte), quote=True)
 
@@ -189,6 +194,7 @@ def json_ld():
         "description": D["site"]["description"],
         "url": D["site"]["url"],
         "sameAs": [ident["linkedin"]],
+        "image": D["site"]["url"] + ident["photo"],
         "address": {"@type": "PostalAddress", "addressRegion": "Nouvelle-Aquitaine", "addressCountry": "FR"},
         "alumniOf": [{"@type": "EducationalOrganization", "name": f["etablissement"]} for f in D["formation"]],
         "hasCredential": [{"@type": "EducationalOccupationalCredential", "name": c["intitule"]} for c in D["certifications"]],
@@ -234,12 +240,16 @@ def page_index():
 <div class="shell">
   <header class="side">
     <div class="side-inner">
+      <div class="cover">
+        <img class="cover-img" src="{e(ident["banniere"])}" alt="{e(ident["banniere_alt"])}" width="964" height="396">
+        <img class="avatar" src="{e(ident["photo"])}" alt="Photo de {e(nom)}" width="480" height="480">
+      </div>
       <div class="identity">
         <h1>{e(nom)}</h1>
         <p class="role">{e(ident["titre"])}</p>
         <p class="tagline">{e(ident["accroche"])}</p>
         <p class="place">{ICONE_LIEU}{e(ident["localisation"])}</p>
-        <p class="print-only print-links"><span class="print-tel">{e(ident.get("telephone", ""))}</span><br>{e(ident["linkedin"])}<br>{e(site["url"])}</p>
+        <p class="print-only print-links"><span class="print-tel">{e(ident.get("telephone", ""))}</span><br>{e(court(ident["linkedin"]))}<br>{e(court(site["url"]))}</p>
       </div>
       {boutons("actions-side", linkedin=False)}
       <nav class="toc" aria-label="Sections">{toc}</nav>

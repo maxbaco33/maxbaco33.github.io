@@ -16,7 +16,10 @@
     "localisation": "Landes, Nouvelle-Aquitaine",
     "linkedin": "https://www.linkedin.com/in/maxence-baconnet-1a10a3246",
     "telephone": "06 89 59 21 23",
-    "telephone_intl": "+33689592123"
+    "telephone_intl": "+33689592123",
+    "photo": "assets/img/portrait.jpg",
+    "banniere": "assets/img/banniere-rafale.jpg",
+    "banniere_alt": "Rafale biplace de l'Armée de l'Air et de l'Espace"
   },
   "en_bref": [
     [
