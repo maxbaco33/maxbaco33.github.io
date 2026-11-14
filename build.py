@@ -18,7 +18,7 @@ SECTIONS = [
     ("experience", "Expérience"),
     ("competences", "Compétences"),
     ("qualifications", "Qualifications"),
-    ("projets", "Projets"),
+    ("projets", "Projet personnel"),
     ("contact", "Contact"),
 ]
 
@@ -147,9 +147,9 @@ def s_projets():
     )
     return f"""
 <section id="projets" class="section" aria-labelledby="t-projets">
-  <h2 id="t-projets">Projets</h2>
+  <h2 id="t-projets">Projet personnel</h2>
   <p class="lede">{e(D["projets_intro"])}</p>
-  <div class="projects">{cartes}
+  <div class="projects{" single" if len(D["projets"]) == 1 else ""}">{cartes}
   </div>
 </section>"""
 

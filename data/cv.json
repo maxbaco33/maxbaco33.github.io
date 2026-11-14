@@ -17,16 +17,30 @@
     "linkedin": "https://www.linkedin.com/in/maxence-baconnet-1a10a3246"
   },
   "en_bref": [
-    ["Expérience", "Plus de 8 ans dans l'Armée de l'Air et de l'Espace"],
-    ["Spécialité", "Avionique Rafale, systèmes de navigation et d'armement"],
-    ["Licence", "Maintenance aéronautique Be2, Rafale C, B et M"],
-    ["Habilitation", "APRS, approbation pour remise en service"],
-    ["Formation", "BTS Systèmes Numériques, électronique et communications"]
+    [
+      "Expérience",
+      "Plus de 8 ans dans l'Armée de l'Air et de l'Espace"
+    ],
+    [
+      "Spécialité",
+      "Avionique Rafale, systèmes de navigation et d'armement"
+    ],
+    [
+      "Licence",
+      "Maintenance aéronautique Be2, Rafale C, B et M"
+    ],
+    [
+      "Habilitation",
+      "APRS, approbation pour remise en service"
+    ],
+    [
+      "Formation",
+      "BTS Systèmes Numériques, électronique et communications"
+    ]
   ],
   "profil": [
     "Technicien avionique dans l'Armée de l'Air et de l'Espace depuis 2018, je diagnostique et résous des pannes sur Rafale, de l'analyse du dysfonctionnement jusqu'à la remise en service de l'avion, pour garantir le maintien de l'activité opérationnelle.",
-    "Titulaire d'un BTS Systèmes Numériques (option Électronique et communications), j'associe une solide base en électronique à plus de 8 ans de terrain dans un environnement aéronautique exigeant, où la sécurité, la qualité et la traçabilité ne se négocient pas.",
-    "Un technicien qui comprend l'avion et qui parle aussi le langage des équipes digitales et des outils d'IA."
+    "Titulaire d'un BTS Systèmes Numériques (option Électronique et communications), j'associe une solide base en électronique à plus de 8 ans de terrain dans un environnement aéronautique exigeant, où la sécurité, la qualité et la traçabilité ne se négocient pas."
   ],
   "objectif": "Rejoindre un industriel de l'aéronautique, de l'électronique ou de la défense en Nouvelle-Aquitaine, sur un poste d'essais et validation, de support technique, d'expertise électronique, de coordination technique ou de supervision de maintenance.",
   "experiences": [
@@ -37,11 +51,26 @@
       "dates": "Depuis juillet 2020",
       "actuel": true,
       "missions": [
-        ["Diagnostic", "recherche de pannes sur les systèmes de navigation et d'armement (SNA) du Rafale, de l'analyse du dysfonctionnement à l'identification de l'élément défaillant."],
-        ["Dépannage opérationnel", "remise en ligne des avions dans les meilleurs délais pour garantir la disponibilité de la flotte."],
-        ["Essais", "vérifications fonctionnelles en zone vol et en zone chantier."],
-        ["Remise en service", "approbation pour remise en service des aéronefs (APRS), dans le respect strict des procédures et de la traçabilité."],
-        ["Coordination", "organisation et suivi des opérations de dépannage, coordination d'équipes techniques et contrôle des interventions."]
+        [
+          "Diagnostic",
+          "recherche de pannes sur les systèmes de navigation et d'armement (SNA) du Rafale, de l'analyse du dysfonctionnement à l'identification de l'élément défaillant."
+        ],
+        [
+          "Dépannage opérationnel",
+          "remise en ligne des avions dans les meilleurs délais pour garantir la disponibilité de la flotte."
+        ],
+        [
+          "Essais",
+          "vérifications fonctionnelles en zone vol et en zone chantier."
+        ],
+        [
+          "Remise en service",
+          "approbation pour remise en service des aéronefs (APRS), dans le respect strict des procédures et de la traçabilité."
+        ],
+        [
+          "Coordination",
+          "organisation et suivi des opérations de dépannage, coordination d'équipes techniques et contrôle des interventions."
+        ]
       ]
     },
     {
@@ -50,7 +79,10 @@
       "lieu": "Rochefort",
       "dates": "Août 2018 – juin 2020",
       "missions": [
-        ["Formation", "formation militaire de sous-officier et formation technique de spécialité avionique."]
+        [
+          "Formation",
+          "formation militaire de sous-officier et formation technique de spécialité avionique."
+        ]
       ]
     },
     {
@@ -59,26 +91,49 @@
       "lieu": "",
       "dates": "Juin – août 2018",
       "missions": [
-        ["Première expérience en entreprise", "mission technique à l'issue du BTS."]
+        [
+          "Première expérience en entreprise",
+          "mission technique à l'issue du BTS."
+        ]
       ]
     }
   ],
   "competences": [
     {
       "groupe": "Maintenance aéronautique",
-      "items": ["Avionique", "Systèmes de navigation et d'armement (SNA)", "Recherche de pannes", "Maintenance corrective", "Tests fonctionnels", "Remise en service"]
+      "items": [
+        "Avionique",
+        "Systèmes de navigation et d'armement (SNA)",
+        "Recherche de pannes",
+        "Maintenance corrective",
+        "Tests fonctionnels",
+        "Remise en service"
+      ]
     },
     {
       "groupe": "Électronique et systèmes",
-      "items": ["Électronique", "Systèmes embarqués", "Support technique"]
+      "items": [
+        "Électronique",
+        "Systèmes embarqués",
+        "Support technique"
+      ]
     },
     {
       "groupe": "Méthodes et organisation",
-      "items": ["Coordination d'équipe", "Assurance qualité", "Sécurité et traçabilité", "Travail sous procédures"]
+      "items": [
+        "Coordination d'équipe",
+        "Assurance qualité",
+        "Sécurité et traçabilité",
+        "Travail sous procédures"
+      ]
     },
     {
       "groupe": "Outils numériques",
-      "items": ["IA générative", "HTML, CSS, JavaScript", "Python (en cours d'acquisition)"]
+      "items": [
+        "IA générative",
+        "HTML, CSS, JavaScript",
+        "Python (en cours d'acquisition)"
+      ]
     }
   ],
   "certifications": [
@@ -107,27 +162,17 @@
       "dates": "2012 – 2015"
     }
   ],
-  "projets_intro": "Projets personnels en préparation, menés sur mon temps libre à partir de matériel, de données et de documents publics.",
+  "projets_intro": "Projet personnel en préparation, mené sur mon temps libre à partir de matériel et de documents publics.",
   "projets": [
     {
       "titre": "Mini-avionique modulaire",
       "resume": "Plusieurs modules électroniques reliés par un bus CAN, à l'image des équipements d'un avion : capteurs redondants avec logique de vote, autotest intégré et détection des dégradations pour désigner le module à remplacer.",
-      "competences": ["Systèmes embarqués", "Bus CAN", "Redondance", "Essais par injection de pannes"]
-    },
-    {
-      "titre": "Vision synthétique pour la route",
-      "resume": "Transposition à l'automobile du principe de vision synthétique des cockpits : la route à venir représentée en 3D à partir de données cartographiques ouvertes, avec virages, pentes et vitesse conseillée anticipés.",
-      "competences": ["Navigation", "Données géographiques", "Rendu 3D", "Contrôle d'intégrité"]
-    },
-    {
-      "titre": "Diagnostic automobile intelligent",
-      "resume": "Surveillance continue du moteur par la prise OBD, alertes hiérarchisées comme dans un cockpit et explication des pannes en langage clair. Fonctionnement en lecture seule, sans aucune écriture sur le réseau du véhicule.",
-      "competences": ["Acquisition de données", "Détection d'anomalies", "Conception orientée sécurité"]
-    },
-    {
-      "titre": "Assistant de révision Part-66",
-      "resume": "Outil de révision pour la licence de maintenance civile : réponses aux questions techniques avec renvoi à la page exacte de documents publics (manuels FAA, réglementation EASA) et génération de questionnaires par module.",
-      "competences": ["Documentation technique", "Réglementation EASA", "Pédagogie"]
+      "competences": [
+        "Systèmes embarqués",
+        "Bus CAN",
+        "Redondance",
+        "Essais par injection de pannes"
+      ]
     }
   ]
 }

@@ -194,6 +194,7 @@ a { color: var(--accent); text-underline-offset: 3px; }
 
 /* ------------------------------------------------------------ projets */
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.projects.single { grid-template-columns: minmax(0, 1fr); max-width: 720px; }
 .project { display: flex; flex-direction: column; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 22px 24px; }
 .project-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .project h3 { font-size: 17.5px; font-weight: 600; }
