@@ -239,7 +239,7 @@ def page_index():
         <p class="role">{e(ident["titre"])}</p>
         <p class="tagline">{e(ident["accroche"])}</p>
         <p class="place">{ICONE_LIEU}{e(ident["localisation"])}</p>
-        <p class="print-only print-links">{e(ident["linkedin"])}<br>{e(site["url"])}</p>
+        <p class="print-only print-links"><span class="print-tel">{e(ident.get("telephone", ""))}</span><br>{e(ident["linkedin"])}<br>{e(site["url"])}</p>
       </div>
       {boutons("actions-side", linkedin=False)}
       <nav class="toc" aria-label="Sections">{toc}</nav>
