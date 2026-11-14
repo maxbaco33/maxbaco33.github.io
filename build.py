@@ -5,36 +5,21 @@ Lit data/cv.json et produit index.html, 404.html, sw.js, sitemap.xml et robots.t
 Usage : python3 build.py            (régénère le site)
         python3 build.py --check    (échoue si les fichiers générés ne sont pas à jour)
 """
-import hashlib
 import html
 import json
 import sys
-from datetime import date
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent
-DONNEES = json.loads((RACINE / "data" / "cv.json").read_text(encoding="utf-8"))
+D = json.loads((RACINE / "data" / "cv.json").read_text(encoding="utf-8"))
 
-PAGES = [
-    ("synop", "Synop", "Synoptique"),
-    ("parcours", "Parcours", "Plan de vol"),
-    ("qualifs", "Qualifs", "Qualifications"),
-    ("systemes", "Systèmes", "État des systèmes"),
-    ("projets", "Projets", "Projets à venir"),
-    ("contact", "Contact", "Contact"),
-]
-
-ASSETS = [
-    "assets/css/cockpit.css",
-    "assets/js/cockpit.js",
-    "assets/fonts/B612-Regular.woff2",
-    "assets/fonts/B612-Bold.woff2",
-    "assets/fonts/B612Mono-Regular.woff2",
-    "assets/fonts/B612Mono-Bold.woff2",
-    "assets/img/favicon.svg",
-    "assets/img/icon-192.png",
-    "assets/img/icon-512.png",
-    "manifest.webmanifest",
+SECTIONS = [
+    ("profil", "Profil"),
+    ("experience", "Expérience"),
+    ("competences", "Compétences"),
+    ("qualifications", "Qualifications"),
+    ("projets", "Projets"),
+    ("contact", "Contact"),
 ]
 
 
@@ -42,254 +27,176 @@ def e(texte):
     return html.escape(str(texte), quote=True)
 
 
-# ---------------------------------------------------------------- synoptique
+ICONE_LIEU = (
+    '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15s5-4.6 5-8.5A5 5 0 0 0 3 6.5C3 10.4 8 15 8 15Z" '
+    'fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.5" r="1.8" fill="currentColor"/></svg>'
+)
+ICONE_LINKEDIN = (
+    '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M1.5 5.5h2.8V14H1.5zM2.9 1.5a1.6 1.6 0 1 1 0 3.2 1.6 1.6 0 0 1 0-3.2ZM6 5.5h2.7v1.2c.4-.7 1.3-1.4 2.7-1.4 2.9 0 3.4 1.9 3.4 4.3V14h-2.8v-4c0-1 0-2.2-1.4-2.2s-1.6 1-1.6 2.1V14H6z"/></svg>'
+)
+ICONE_PDF = (
+    '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0 3.2-3.2M8 10 4.8 6.8M2.5 12.5v1h11v-1" '
+    'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+)
 
-ETATS = {"ok": "OK", "encours": "En cours"}
 
-
-def noeud(n, x, y, l, h):
-    etat = n["etat"]
+def boutons(classe=""):
+    ident = D["identite"]
     return (
-        f'<a class="syn-node" href="#{e(n["page"])}" data-page="{e(n["page"])}">'
-        f'<rect class="syn-box" x="{x}" y="{y}" width="{l}" height="{h}" rx="6"/>'
-        f'<circle class="syn-led {etat}" cx="{x + 20}" cy="{y + 25}" r="6"/>'
-        f'<text class="syn-title" x="{x + 36}" y="{y + 30}">{e(n["titre"])}</text>'
-        f'<text class="syn-detail" x="{x + 20}" y="{y + 56}">{e(n["detail"])}</text>'
-        f'<text class="syn-state {etat}" x="{x + 20}" y="{y + 79}">{e(ETATS[etat])}</text>'
-        f'<text class="syn-go" x="{x + l - 22}" y="{y + 79}" text-anchor="middle">›</text>'
-        "</a>"
+        f'<div class="actions {classe}">'
+        f'<a class="btn btn-primary" href="{e(ident["linkedin"])}" rel="noopener">{ICONE_LINKEDIN}Me contacter sur LinkedIn</a>'
+        f'<a class="btn" href="{e(D["site"]["pdf"])}" download>{ICONE_PDF}Télécharger le CV (PDF)</a>'
+        "</div>"
     )
-
-
-def centre(x, y, l, h, cx):
-    ident = DONNEES["identite"]
-    return (
-        f'<g class="syn-center"><rect class="syn-box" x="{x}" y="{y}" width="{l}" height="{h}" rx="6"/>'
-        f'<text class="syn-title" x="{cx}" y="{y + 34}" text-anchor="middle">{e(ident["prenom"])} {e(ident["nom"])}</text>'
-        f'<text class="syn-detail" x="{cx}" y="{y + 58}" text-anchor="middle">Technicien avionique</text></g>'
-    )
-
-
-def synoptique():
-    noeuds = DONNEES["synoptique"]
-    # Disposition large : unité centrale au milieu, sous-systèmes aux quatre coins.
-    large = ['<svg class="syn syn-wide" viewBox="0 0 760 400" role="group" aria-label="Synoptique du profil">']
-    liaisons = [
-        "M250,68 H300 V160", "M510,68 H460 V160",
-        "M250,332 H300 V240", "M510,332 H460 V240",
-    ]
-    for d in liaisons:
-        large.append(f'<path class="flow" d="{d}"/>')
-    large.append(centre(270, 160, 220, 80, 380))
-    for n, (x, y) in zip(noeuds, [(20, 20), (510, 20), (20, 284), (510, 284)]):
-        large.append(noeud(n, x, y, 230, 96))
-    large.append("</svg>")
-
-    # Disposition haute pour mobile : bus vertical à gauche.
-    haut = ['<svg class="syn syn-tall" viewBox="0 0 360 572" role="group" aria-label="Synoptique du profil">']
-    ys = [126, 236, 346, 456]
-    haut.append(f'<path class="flow" d="M64,54 H22 V{ys[-1] + 48}"/>')
-    for y in ys:
-        haut.append(f'<path class="flow" d="M22,{y + 48} H44"/>')
-    haut.append(centre(64, 14, 252, 80, 190))
-    for n, y in zip(noeuds, ys):
-        haut.append(noeud(n, 44, y, 300, 96))
-    haut.append("</svg>")
-    return "".join(large) + "".join(haut)
 
 
 # ---------------------------------------------------------------- sections
 
-def losange(classe):
-    return (
-        f'<svg class="wpt-sym {classe}" viewBox="0 0 16 16" aria-hidden="true">'
-        '<path d="M8 1 L15 8 L8 15 L1 8 Z"/></svg>'
+def s_profil():
+    paras = "".join(f"<p>{e(p)}</p>" for p in D["profil"])
+    fiche = "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in D["en_bref"])
+    return f"""
+<section id="profil" class="section" aria-labelledby="t-profil">
+  <h2 id="t-profil">Profil</h2>
+  <div class="prose">{paras}</div>
+  <dl class="datasheet" aria-label="En bref">{fiche}</dl>
+  <div class="objectif"><p class="objectif-titre">Objectif professionnel</p><p>{e(D["objectif"])}</p></div>
+</section>"""
+
+
+def s_experience():
+    postes = []
+    for x in D["experiences"]:
+        badge = '<span class="badge badge-current">Poste actuel</span>' if x.get("actuel") else ""
+        lieu = f'<p class="meta-place">{e(x["lieu"])}</p>' if x.get("lieu") else ""
+        missions = "".join(f"<li><strong>{e(t)} :</strong> {e(d)}</li>" for t, d in x["missions"])
+        postes.append(f"""
+  <article class="entry{' is-current' if x.get('actuel') else ''}">
+    <div class="entry-meta"><p class="meta-dates">{e(x["dates"])}</p>{lieu}</div>
+    <div class="entry-body">
+      <h3>{e(x["poste"])}{badge}</h3>
+      <p class="entry-org">{e(x["organisme"])}</p>
+      <ul class="missions">{missions}</ul>
+    </div>
+  </article>""")
+    return f"""
+<section id="experience" class="section" aria-labelledby="t-experience">
+  <h2 id="t-experience">Expérience</h2>
+  <div class="timeline">{"".join(postes)}
+  </div>
+</section>"""
+
+
+def s_competences():
+    groupes = "".join(
+        f'<div class="skill-group"><h3>{e(g["groupe"])}</h3><ul>'
+        + "".join(f"<li>{e(i)}</li>" for i in g["items"])
+        + "</ul></div>"
+        for g in D["competences"]
     )
-
-
-def section_synop():
-    ident = DONNEES["identite"]
-    paras = "".join(f"<p>{e(p)}</p>" for p in DONNEES["a_propos"])
     return f"""
-<section id="synop" class="page" data-titre="Synoptique" aria-labelledby="h-synop">
-  <h2 id="h-synop" class="sr-only">Synoptique</h2>
-  <div class="ident">
-    <h1>{e(ident["prenom"])} {e(ident["nom"])}</h1>
-    <p class="ident-title">{e(ident["titre"])}</p>
-    <p class="ident-tag">{e(ident["accroche"])}</p>
-    <p class="ident-meta">{e(ident["statut"])}<span class="sep" aria-hidden="true">/</span>{e(ident["localisation"])}</p>
+<section id="competences" class="section" aria-labelledby="t-competences">
+  <h2 id="t-competences">Compétences</h2>
+  <div class="skills">{groupes}</div>
+</section>"""
+
+
+def s_qualifications():
+    certifs = "".join(
+        f"""
+    <li class="cert">
+      <p class="cert-title">{e(c["intitule"])}</p>
+      <p class="cert-detail">{e(c["precision"])}</p>
+      <p class="cert-org">{e(c["organisme"])}</p>
+    </li>"""
+        for c in D["certifications"]
+    )
+    formations = "".join(
+        f"""
+  <article class="entry">
+    <div class="entry-meta"><p class="meta-dates">{e(f["dates"])}</p></div>
+    <div class="entry-body">
+      <h3>{e(f["diplome"])}</h3>
+      {f'<p class="entry-sub">{e(f["option"])}</p>' if f["option"] else ""}
+      <p class="entry-org">{e(f["etablissement"])}</p>
+    </div>
+  </article>"""
+        for f in D["formation"]
+    )
+    return f"""
+<section id="qualifications" class="section" aria-labelledby="t-qualifications">
+  <h2 id="t-qualifications">Qualifications</h2>
+  <h3 class="subhead">Licences et habilitations</h3>
+  <ul class="certs">{certifs}
+  </ul>
+  <h3 class="subhead">Formation</h3>
+  <div class="timeline compact">{formations}
   </div>
-  <div class="synoptic">{synoptique()}</div>
-  <div class="about">{paras}</div>
 </section>"""
 
 
-def section_parcours():
-    legs = []
-    for leg in DONNEES["plan_de_vol"]:
-        classe = "actif" if leg.get("actif") else ("dest" if leg.get("destination") else "")
-        org = e(leg["organisme"]) + (f", {e(leg['lieu'])}" if leg.get("lieu") else "")
-        points = "".join(f"<li>{e(p)}</li>" for p in leg["points"])
-        etiquette = ""
-        if leg.get("actif"):
-            etiquette = '<span class="chip actif">Branche active</span>'
-        elif leg.get("destination"):
-            etiquette = '<span class="chip encours">Destination</span>'
-        legs.append(f"""
-    <li class="leg {classe}">
-      <div class="leg-wpt">{losange(classe)}<span class="leg-code">{e(leg["code"])}</span><span class="leg-dates">{e(leg["dates"])}</span></div>
-      <div class="leg-body">
-        <h3>{e(leg["intitule"])} {etiquette}</h3>
-        <p class="leg-org">{org}</p>
-        {f'<ul>{points}</ul>' if points else ''}
-      </div>
-    </li>""")
-    return f"""
-<section id="parcours" class="page" data-titre="Plan de vol" aria-labelledby="h-parcours">
-  <h2 id="h-parcours">Plan de vol</h2>
-  <p class="lede">Mon parcours lu comme un plan de vol, du point de départ à la prochaine étape. La branche active est en magenta, comme sur un calculateur de vol.</p>
-  <ol class="fpln">{"".join(legs)}
-  </ol>
-</section>"""
-
-
-def section_qualifs():
-    q = DONNEES["qualifications"]
-
-    def ligne(item, extra=""):
-        precision = f'<span class="row-sub">{e(item["precision"])}</span>' if item.get("precision") else ""
-        return f"""
-      <li class="row">
-        <div><span class="row-title">{e(item["intitule"])}</span>{precision}<span class="row-org">{e(item["organisme"])}{extra}</span></div>
-        <span class="chip ok">Validé</span>
-      </li>"""
-
-    licences = "".join(ligne(i) for i in q["licences"])
-    diplomes = "".join(ligne(i, f", {e(i['annee'])}") for i in q["diplomes"])
-    return f"""
-<section id="qualifs" class="page" data-titre="Qualifications" aria-labelledby="h-qualifs">
-  <h2 id="h-qualifs">Qualifications</h2>
-  <h3 class="group">Licences et habilitations</h3>
-  <ul class="rows">{licences}
-  </ul>
-  <h3 class="group">Diplômes</h3>
-  <ul class="rows">{diplomes}
-  </ul>
-</section>"""
-
-
-def section_systemes():
-    groupes = []
-    for g in DONNEES["competences"]:
-        lignes = "".join(
-            f'<li class="row"><span class="row-title">{e(nom)}</span>'
-            f'<span class="chip {etat}">{"Acquis" if etat == "ok" else "En cours"}</span></li>'
-            for nom, etat in g["items"]
-        )
-        groupes.append(f'<div class="sys-group"><h3 class="group">{e(g["groupe"])}</h3><ul class="rows">{lignes}</ul></div>')
-    return f"""
-<section id="systemes" class="page" data-titre="État des systèmes" aria-labelledby="h-systemes">
-  <h2 id="h-systemes">État des systèmes</h2>
-  <p class="lede">Mes compétences, présentées comme une page d'état des systèmes : en vert ce qui est acquis, en ambre ce qui est en cours d'acquisition.</p>
-  <div class="sys-grid">{"".join(groupes)}</div>
-</section>"""
-
-
-def section_projets():
-    cartes = []
-    for p in DONNEES["projets"]:
-        briques = "".join(f'<li class="chip data">{e(b)}</li>' for b in p["briques"])
-        cartes.append(f"""
-    <article class="card" id="projet-{e(p["id"])}">
-      <header class="card-head"><h3>{e(p["titre"])}</h3><span class="chip encours">Bientôt</span></header>
+def s_projets():
+    cartes = "".join(
+        f"""
+    <article class="project">
+      <div class="project-head"><h3>{e(p["titre"])}</h3><span class="badge badge-soon">En préparation</span></div>
       <p>{e(p["resume"])}</p>
-      <p class="card-demo"><span>Ce que ça démontrera</span>{e(p["demontre"])}</p>
-      <ul class="chips" aria-label="Briques techniques">{briques}</ul>
-    </article>""")
+      <ul class="tags" aria-label="Compétences mobilisées">{"".join(f"<li>{e(c)}</li>" for c in p["competences"])}</ul>
+    </article>"""
+        for p in D["projets"]
+    )
     return f"""
-<section id="projets" class="page" data-titre="Projets à venir" aria-labelledby="h-projets">
-  <h2 id="h-projets">Projets à venir</h2>
-  <p class="lede">{e(DONNEES["note_projets"])}</p>
-  <div class="cards">{"".join(cartes)}
+<section id="projets" class="section" aria-labelledby="t-projets">
+  <h2 id="t-projets">Projets</h2>
+  <p class="lede">{e(D["projets_intro"])}</p>
+  <div class="projects">{cartes}
   </div>
 </section>"""
 
 
-def section_contact():
-    ident = DONNEES["identite"]
-    dest = next(l for l in DONNEES["plan_de_vol"] if l.get("destination"))
+def s_contact():
     return f"""
-<section id="contact" class="page" data-titre="Contact" aria-labelledby="h-contact">
-  <h2 id="h-contact">Contact</h2>
-  <p class="lede">{e(dest["points"][0])} Mobilité en {e(dest["lieu"])}.</p>
-  <div class="actions">
-    <a class="btn btn-primary" href="{e(ident["linkedin"])}" rel="noopener">Me contacter sur LinkedIn</a>
-    <button class="btn js-only" type="button" data-action="imprimer">Imprimer le CV</button>
-  </div>
-  <h3 class="group">Code couleur de cet écran</h3>
-  <dl class="legend">
-    <div><dt><span class="sw cyan"></span>Cyan</dt><dd>Données et éléments sélectionnables</dd></div>
-    <div><dt><span class="sw magenta"></span>Magenta</dt><dd>Élément actif</dd></div>
-    <div><dt><span class="sw green"></span>Vert</dt><dd>Validé, acquis</dd></div>
-    <div><dt><span class="sw amber"></span>Ambre</dt><dd>En cours, à venir</dd></div>
-  </dl>
-  <p class="note">Les mêmes conventions que sur les écrans de cockpit. Raccourcis : touches 1 à 6 pour changer de page, « / » pour saisir une commande.</p>
+<section id="contact" class="section" aria-labelledby="t-contact">
+  <h2 id="t-contact">Contact</h2>
+  <p class="lede">Pour échanger sur une opportunité, le plus simple est de me contacter sur LinkedIn. Basé dans les Landes, mobile dans toute la Nouvelle-Aquitaine.</p>
+  {boutons("actions-row")}
 </section>"""
 
 
 # ---------------------------------------------------------------- page
 
 def json_ld():
-    ident = DONNEES["identite"]
-    q = DONNEES["qualifications"]
-    donnees = {
+    ident = D["identite"]
+    return json.dumps({
         "@context": "https://schema.org",
         "@type": "Person",
         "name": f'{ident["prenom"]} {ident["nom"]}',
         "jobTitle": ident["titre"],
-        "description": DONNEES["site"]["description"],
-        "url": DONNEES["site"]["url"],
+        "description": D["site"]["description"],
+        "url": D["site"]["url"],
         "sameAs": [ident["linkedin"]],
         "address": {"@type": "PostalAddress", "addressRegion": "Nouvelle-Aquitaine", "addressCountry": "FR"},
-        "alumniOf": [{"@type": "EducationalOrganization", "name": d["organisme"]} for d in q["diplomes"]],
-        "knowsAbout": [nom for g in DONNEES["competences"] for nom, _ in g["items"]],
-    }
-    return json.dumps(donnees, ensure_ascii=False, indent=1)
-
-
-def touches():
-    gauche = "".join(
-        f'<a class="key" href="#{pid}" data-page="{pid}"><span class="key-n">{i}</span><span class="key-l">{e(court)}</span></a>'
-        for i, (pid, court, _) in enumerate(PAGES, 1)
-    )
-    ident = DONNEES["identite"]
-    droite = (
-        '<button class="key js-only" type="button" data-action="imprimer"><span class="key-l">Imprimer</span></button>'
-        f'<a class="key" href="{e(ident["linkedin"])}" rel="noopener"><span class="key-l">LinkedIn</span></a>'
-        '<button class="key js-only" type="button" data-action="test"><span class="key-l">Autotest</span></button>'
-        '<button class="key js-only" type="button" data-action="aide"><span class="key-l">Aide</span></button>'
-    )
-    return gauche, droite
+        "alumniOf": [{"@type": "EducationalOrganization", "name": f["etablissement"]} for f in D["formation"]],
+        "hasCredential": [{"@type": "EducationalOccupationalCredential", "name": c["intitule"]} for c in D["certifications"]],
+        "knowsAbout": [i for g in D["competences"] for i in g["items"]],
+    }, ensure_ascii=False, indent=1)
 
 
 def page_index():
-    site = DONNEES["site"]
-    ident = DONNEES["identite"]
-    gauche, droite = touches()
-    sections = "".join([
-        section_synop(), section_parcours(), section_qualifs(),
-        section_systemes(), section_projets(), section_contact(),
-    ])
+    site, ident = D["site"], D["identite"]
     nom = f'{ident["prenom"]} {ident["nom"]}'
+    toc = "".join(f'<a href="#{sid}">{e(label)}</a>' for sid, label in SECTIONS)
+    contenu = "".join([s_profil(), s_experience(), s_competences(), s_qualifications(), s_projets(), s_contact()])
     return f"""<!DOCTYPE html>
-<html lang="{site["langue"]}" class="no-js">
+<html lang="{site["langue"]}">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(site["titre"])}</title>
 <meta name="description" content="{e(site["description"])}">
+<meta name="author" content="{e(nom)}">
 <link rel="canonical" href="{e(site["url"])}">
-<meta name="theme-color" content="#0c1116">
+<meta name="theme-color" content="#0f2b46">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="{e(site["titre"])}">
 <meta property="og:description" content="{e(site["description"])}">
@@ -299,50 +206,38 @@ def page_index():
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/icon-192.png">
-<link rel="preload" href="assets/fonts/B612-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/B612Mono-Bold.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/cockpit.css">
-<script>document.documentElement.className = "js";</script>
+<link rel="preload" href="assets/fonts/IBMPlexSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/IBMPlexSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
 <script type="application/ld+json">
 {json_ld()}
 </script>
 </head>
 <body>
-<a class="skip" href="#main">Aller au contenu</a>
-<div class="print-head">
-  <p class="ph-name">{e(nom)}</p>
-  <p class="ph-title">{e(ident["titre"])}. {e(ident["accroche"])}.</p>
-  <p class="ph-links">{e(ident["localisation"])} / {e(ident["linkedin"])} / {e(site["url"])}</p>
-</div>
-<div class="unit">
-  <nav class="keys keys-left" aria-label="Pages">{gauche}</nav>
-  <div class="screen">
-    <header class="status">
-      <span class="st-id">{e(ident["prenom"][0])}. {e(ident["nom"])}</span>
-      <span class="st-page" id="st-page">Synoptique</span>
-      <span class="st-right"><span class="st-test" id="st-test">Sys OK</span><time class="st-clock" id="st-clock"></time></span>
-    </header>
-    <main id="main" tabindex="-1">{sections}
-    </main>
-    <footer class="scratch js-only">
-      <p class="scratch-msg" id="msg" role="status" aria-live="polite">Tapez « aide » pour la liste des commandes.</p>
-      <form class="scratch-form" id="mcdu" autocomplete="off">
-        <label for="cmd" class="sr-only">Commande</label>
-        <span class="prompt" aria-hidden="true">›</span>
-        <input id="cmd" name="cmd" type="text" placeholder="aide" spellcheck="false" autocapitalize="off" enterkeyhint="go">
-        <button class="mini" type="submit">Exécuter</button>
-      </form>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<div class="shell">
+  <header class="side">
+    <div class="side-inner">
+      <div class="identity">
+        <h1>{e(nom)}</h1>
+        <p class="role">{e(ident["titre"])}</p>
+        <p class="tagline">{e(ident["accroche"])}</p>
+        <p class="place">{ICONE_LIEU}{e(ident["localisation"])}</p>
+        <p class="print-only print-links">{e(ident["linkedin"])}<br>{e(site["url"])}</p>
+      </div>
+      {boutons("actions-side")}
+      <nav class="toc" aria-label="Sections">{toc}</nav>
+    </div>
+  </header>
+  <main id="contenu" class="content">{contenu}
+    <footer class="foot">
+      <p>© {e(site["annee"])} {e(nom)}. Dernière mise à jour : {e(site["mise_a_jour"])}.</p>
     </footer>
-  </div>
-  <nav class="keys keys-right" aria-label="Actions">{droite}</nav>
+  </main>
 </div>
-<footer class="credits">
-  <p>Conçu avec l'IA comme copilote, en HTML, CSS et JavaScript sans framework. Police B612, dessinée pour les écrans de cockpit Airbus (licence OFL). Consultable hors ligne. Mise à jour : {e(site["mise_a_jour"])}.</p>
-</footer>
-<script src="assets/js/cockpit.js" defer></script>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>
 """
@@ -350,21 +245,21 @@ def page_index():
 
 def page_404():
     return """<!DOCTYPE html>
-<html lang="fr" class="no-js">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page introuvable</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/css/cockpit.css">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body class="solo">
-<main class="screen solo-screen">
-  <p class="solo-code">Erreur 404</p>
+<main class="solo-box">
+  <p class="eyebrow">Erreur 404</p>
   <h1>Page introuvable</h1>
   <p class="lede">Cette adresse ne correspond à aucune page du site.</p>
-  <p><a class="btn btn-primary" href="/">Retour au synoptique</a></p>
+  <p><a class="btn btn-primary" href="/">Retour à l'accueil</a></p>
 </main>
 </body>
 </html>
@@ -372,59 +267,36 @@ def page_404():
 
 
 def service_worker():
-    empreinte = hashlib.sha256()
-    for chemin in ASSETS + ["data/cv.json"]:
-        empreinte.update((RACINE / chemin).read_bytes())
-    version = empreinte.hexdigest()[:12]
-    liste = json.dumps(["./"] + ASSETS, indent=1)
-    return f"""// Généré par build.py : ne pas modifier à la main.
-const VERSION = "cockpit-{version}";
-const FICHIERS = {liste};
-
-self.addEventListener("install", (evt) => {{
-  evt.waitUntil(caches.open(VERSION).then((c) => c.addAll(FICHIERS)).then(() => self.skipWaiting()));
-}});
-
-self.addEventListener("activate", (evt) => {{
+    # L'ancienne version du site installait un service worker : celui-ci le désinstalle proprement.
+    return """// Généré par build.py. Désinstalle le service worker de l'ancienne version du site.
+self.addEventListener("install", () => self.skipWaiting());
+self.addEventListener("activate", (evt) => {
   evt.waitUntil(
     caches.keys()
-      .then((cles) => Promise.all(cles.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim())
+      .then((cles) => Promise.all(cles.map((k) => caches.delete(k))))
+      .then(() => self.registration.unregister())
   );
-}});
-
-self.addEventListener("fetch", (evt) => {{
-  const req = evt.request;
-  if (req.method !== "GET" || new URL(req.url).origin !== self.location.origin) return;
-  if (req.mode === "navigate") {{
-    evt.respondWith(
-      fetch(req)
-        .then((rep) => {{ const copie = rep.clone(); caches.open(VERSION).then((c) => c.put("./", copie)); return rep; }})
-        .catch(() => caches.match("./"))
-    );
-    return;
-  }}
-  evt.respondWith(caches.match(req).then((trouve) => trouve || fetch(req)));
-}});
+});
 """
 
 
 def sitemap():
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>{DONNEES["site"]["url"]}</loc><lastmod>{date.today().isoformat()}</lastmod></url>
+  <url><loc>{D["site"]["url"]}</loc></url>
 </urlset>
 """
 
 
 def robots():
-    return f"User-agent: *\nAllow: /\nSitemap: {DONNEES['site']['url']}sitemap.xml\n"
+    return f"User-agent: *\nAllow: /\nSitemap: {D['site']['url']}sitemap.xml\n"
 
 
 SORTIES = {
     "index.html": page_index,
     "404.html": page_404,
     "sw.js": service_worker,
+    "sitemap.xml": sitemap,
     "robots.txt": robots,
 }
 
@@ -433,21 +305,16 @@ def main():
     verifier = "--check" in sys.argv
     perimes = []
     for nom, fabrique in SORTIES.items():
-        contenu = fabrique()
-        cible = RACINE / nom
+        contenu, cible = fabrique(), RACINE / nom
         if verifier:
             if not cible.exists() or cible.read_text(encoding="utf-8") != contenu:
                 perimes.append(nom)
         else:
             cible.write_text(contenu, encoding="utf-8")
-    if not verifier:
-        (RACINE / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
-        print("Site généré :", ", ".join(list(SORTIES) + ["sitemap.xml"]))
-    elif perimes:
+    if verifier and perimes:
         print("Fichiers à régénérer :", ", ".join(perimes))
         sys.exit(1)
-    else:
-        print("Site à jour.")
+    print("Site à jour." if verifier else "Site généré : " + ", ".join(SORTIES))
 
 
 if __name__ == "__main__":
