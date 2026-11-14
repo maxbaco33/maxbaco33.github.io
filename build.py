@@ -154,12 +154,24 @@ def s_projets():
 </section>"""
 
 
+ICONE_TEL = (
+    '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.2 1.8 3.4 2.3c-.8.2-1.3 1-1.1 1.8 1 4.2 4.3 7.5 8.5 8.5.8.2 1.6-.3 1.8-1.1l.5-1.8-2.9-1.3-1.2 1.2a8 8 0 0 1-3.3-3.3l1.2-1.2z" '
+    'fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>'
+)
+
+
 def s_contact():
+    ident = D["identite"]
+    tel = ""
+    if ident.get("telephone"):
+        tel = (f'<p class="contact-tel">{ICONE_TEL}<span>Téléphone :</span> '
+               f'<a href="tel:{e(ident["telephone_intl"])}">{e(ident["telephone"])}</a></p>')
     return f"""
 <section id="contact" class="section" aria-labelledby="t-contact">
   <h2 id="t-contact">Contact</h2>
   <p class="lede">Pour échanger sur une opportunité, le plus simple est de me contacter sur LinkedIn. Basé dans les Landes, mobile dans toute la Nouvelle-Aquitaine.</p>
   {boutons("actions-row")}
+  {tel}
 </section>"""
 
 
