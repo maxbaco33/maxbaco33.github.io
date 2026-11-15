@@ -18,7 +18,6 @@ SECTIONS = [
     ("experience", "Expérience"),
     ("competences", "Compétences"),
     ("qualifications", "Qualifications"),
-    ("projets", "Projet personnel"),
     ("contact", "Contact"),
 ]
 
@@ -219,7 +218,7 @@ def page_index():
     site, ident = D["site"], D["identite"]
     nom = f'{ident["prenom"]} {ident["nom"]}'
     toc = "".join(f'<a href="#{sid}">{e(label)}</a>' for sid, label in SECTIONS)
-    contenu = "".join([s_profil(), s_experience(), s_competences(), s_qualifications(), s_projets(), s_contact()])
+    contenu = "".join([s_profil(), s_experience(), s_competences(), s_qualifications(), s_contact()])
     return f"""<!DOCTYPE html>
 <html lang="{site["langue"]}">
 <head>

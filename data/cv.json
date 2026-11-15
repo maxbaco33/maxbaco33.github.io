@@ -144,18 +144,5 @@
       "etablissement": "Lycée professionnel Condorcet",
       "dates": "2012 – 2015"
     }
-  ],
-  "projets_intro": "Projet personnel en préparation, mené sur mon temps libre à partir de matériel et de documents publics.",
-  "projets": [
-    {
-      "titre": "Mini-avionique modulaire",
-      "resume": "Plusieurs modules électroniques reliés par un bus CAN, à l'image des équipements d'un avion : capteurs redondants avec logique de vote, autotest intégré et détection des dégradations pour désigner le module à remplacer.",
-      "competences": [
-        "Systèmes embarqués",
-        "Bus CAN",
-        "Redondance",
-        "Essais par injection de pannes"
-      ]
-    }
   ]
 }
